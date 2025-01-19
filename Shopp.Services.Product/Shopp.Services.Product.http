@@ -1,0 +1,6 @@
+@Shopp.Services.Product_HostAddress = http://localhost:5106
+
+GET {{Shopp.Services.Product_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+@Shopp.Services.OrderAPI_HostAddress = http://localhost:5267
+
+GET {{Shopp.Services.OrderAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

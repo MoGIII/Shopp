@@ -1,0 +1,6 @@
+@Shopp.Services.RewardAPI_HostAddress = http://localhost:5168
+
+GET {{Shopp.Services.RewardAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

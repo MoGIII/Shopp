@@ -1,0 +1,104 @@
+﻿@using Shopp.Web.Models.DTO
+
+@model CartDTO
+
+<form method="post">
+    <input asp-for="CartHeader.UserId" hidden />
+    <input asp-for="CartHeader.CartHeaderId" hidden />
+    <input asp-for="CartHeader.CouponCode" hidden />
+    <input asp-for="CartHeader.Discount" hidden />
+    <input asp-for="CartHeader.CartTotal" hidden />
+    <div class="border mt-2 p-4 rounded bg-dark-subtle">
+        <div class="container row">
+            <div class="col-md-7 col-12">
+                <span style="font-size:25px;" class="text-dark mb-2">Order Summary</span>
+            </div>
+            <div class="col-md-5 col-12">
+                <a asp-action="CartIndex" class="btn btn-outline-dark form-control">Back to Cart</a>
+            </div>
+            <br /><br /><br />
+            <hr />
+            <div class="col-7">
+                <div class="row pt-2">
+                    <div class="col-12 py-2">
+                        <input asp-for="CartHeader.Name" placeholder="Name" class="form-control" />
+                        <span asp-validation-for="CartHeader.Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 py-2">
+                        <input asp-for="CartHeader.Email" placeholder="Email" class="form-control" />
+                        <span asp-validation-for="CartHeader.Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 py-2">
+                        <input asp-for="CartHeader.Phone" class="form-control" placeholder="Phone Number" />
+                        <span asp-validation-for="CartHeader.Phone" class="text-danger"></span>
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label class="col-form-label">Order will be proccessed and shipped in the next few buissness days.</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <div class=" d-none d-lg-block">
+                            <div class="row text-dark">
+                                <div class="col-6">
+                                    Product Details
+                                </div>
+
+                                <div class="col-3">
+                                    Price
+                                </div>
+                                <div class="col-3">
+                                    Count
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        @foreach (var item in Model.CartDetails)
+                        {
+                            <div class="row h-100">
+                                <div class="col-6">
+                                    <span style="font-size:20px">@item.Product.Name</span>
+                                </div>
+
+                                <div class="col-3" style="font-size:11px;">
+                                    <span style="font-size:17px;">@string.Format("{0:c}",item.Product.Price)</span>
+
+                                </div>
+                                <div class="col-3" style="font-size:11px;">
+                                    <span style="font-size:17px;">@item.Count</span>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                        <div class="row">
+                            <div class="col-12 text-center pr-4 text-dark">
+                                Order Total :  @string.Format("{0:c}", Model.CartHeader.CartTotal)<br />
+                                @if(Model.CartHeader.Discount > 0){
+                                    <span class="text-dark"> TotalDiscount: @string.Format("{0:c}", Model.CartHeader.Discount)</span>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+
+                            <div class="col-12 ">
+                                <button type="submit" class="btn btn-success form-control ">
+                                    <span>Place Order</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
